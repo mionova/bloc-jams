@@ -30,6 +30,22 @@
      ]
  };
 
+// Third Example Album
+ var albumRadiohead = {
+     title: 'The King of Limbs',
+     artist: 'Radiohead',
+     label: 'EM',
+     year: '1989',
+     albumArtUrl: 'assets/images/album_covers/15.png',
+     songs: [
+         { title: 'Bloom', duration: '5:15' },
+         { title: 'Morning Mr Magpie', duration: '4:41' },
+         { title: 'Little by Little', duration: '4:27'},
+         { title: 'Feral', duration: '3:13' },
+         { title: 'Lotus Flower', duration: '5:01'}
+     ]
+ };
+
  var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
@@ -42,14 +58,17 @@
      return template;
  };
 
+
+
+// selecting all of the HTML elements required to display on the album page: title, artist, release info, image, and song list. 
+
+var albumTitle = document.getElementsByClassName('album-view-title')[0];
+var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+var albumImage = document.getElementsByClassName('album-cover-art')[0];
+var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
 var setCurrentAlbum = function(album) {
-     // selecting all of the HTML elements required to display on the album page: title, artist, release info, image, and song list. 
-    
-     var albumTitle = document.getElementsByClassName('album-view-title')[0];
-     var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-     var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-     var albumImage = document.getElementsByClassName('album-cover-art')[0];
-     var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
  
      // the firstChild property identifies the first child node of an element, and  nodeValue returns or sets the value of a node.
      albumTitle.firstChild.nodeValue = album.title;
@@ -68,4 +87,14 @@ var setCurrentAlbum = function(album) {
  
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
+     
+     var albums = [albumPicasso, albumMarconi, albumRadiohead]
+     var index = 1;
+     albumImage.addEventListener("click", function(event) {
+         setCurrentAlbum(albums[index]);
+         index++;
+         if (index == albums.length) {
+             index = 0;
+         }
+     });
  };
