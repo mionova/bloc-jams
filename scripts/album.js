@@ -133,15 +133,25 @@
      }
  };
 
- var findParentByClassName = function (element, targetClass) {
-     if (element) {
-         var currentParent = element.parentElement;
-         while (currentParent.className !== targetClass && currentParent.className !== null) {
-             currentParent = currentParent.parentElement;
-         }
-         return currentParent;
-     }
- };
+ var findParentByClassName = function(element, targetClass) {
+    if (element) {
+        var currentParent = element.parentElement;
+        // check if parent exists. 
+            if (!currentParent){
+                alert("No parent found");
+            }
+        
+        // shows a different string in the console
+        
+        while (currentParent.className !== targetClass && currentParent.className !== null) {
+            if(currentParent.className !== targetClass) {
+                alert("No parent found with that class name");
+            }
+          currentParent = currentParent.parentElement;
+        }
+        return currentParent;
+    }
+};
 
  var getSongItem = function (element) {
      switch (element.className) {
