@@ -24,7 +24,7 @@ var clickHandler = function() {
 
    setSong(songNumber);
    currentSoundFile.play();
-   updateSeekBarWhileSongPlays()
+   updateSeekBarWhileSongPlays();
     $(this).html(pauseButtonTemplate);
    currentSongFromAlbum =  currentAlbum.songs[songNumber - 1];
 
@@ -114,6 +114,7 @@ var clickHandler = function() {
               var seekBarFillRatio = this.getTime() / this.getDuration();
               var $seekBar = $('.seek-control .seek-bar');
               updateSeekPercentage($seekBar, seekBarFillRatio);
+              setCurrentTimeInPlayerBar(filterTimeCode(currentTime));
           });
       }
   };
@@ -212,9 +213,25 @@ var getSongNumberCell = function(number) {
    $('.artist-name').text(currentSongFromAlbum.artist);
    $('.artist-song-mobile').text(currentAlbum.artist + " - " + currentSongFromAlbum);
    $('.main-controls .play-pause').html(playerBarPauseButton);
-
  };
 
+
+ var setCurrentTimeInPlayerBar = function(currentTime) {
+     $('.current-time').text(currentTime);
+ };
+
+var setTotalTimeInPlayerBar = function(totalTime) {
+    var time = filterTimeCode(totalTime);
+    $('.total-time').text(time);
+};
+
+var filterTimeCode = function(timeInSeconds) {
+    var time =parseFloat(timeInSeconds);
+    var minutes = Math.floor(time/60);
+    var seconds = Math.round(time - minutes*60);
+    }
+    return minutes + ":" +seconds;    
+};
 
  var trackIndex = function(album, song) {
      return album.songs.indexOf(song);
@@ -235,7 +252,7 @@ var getSongNumberCell = function(number) {
      // Set a new current song
      setSong(currentSongIndex + 1);
      currentSoundFile.play();
-     updateSeekBarWhileSongPlays()
+     updateSeekBarWhileSongPlays();
      currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
 
      // Update the Player Bar information
@@ -261,7 +278,7 @@ var getSongNumberCell = function(number) {
 
    setSong(currentSongIndex + 1);
    currentSoundFile.play();
-   updateSeekBarWhileSongPlays()
+   updateSeekBarWhileSongPlays();
    currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
 
    updatePlayerBarSong();
