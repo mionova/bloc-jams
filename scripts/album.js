@@ -165,7 +165,6 @@ var nextSong = function() {
      $lastSongNumberCell.html(lastSongNumber);
  };
 
-
  var previousSong = function() {
    var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
    currentSongIndex--;
@@ -202,12 +201,14 @@ var currentVolume = 80;
 
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
-
-
+var $mainControl = $('.main-controls .play-pause');
 
 $(document).ready(function() {
   setCurrentAlbum(albumPicasso);
   $previousButton.click(previousSong);
   $nextButton.click(nextSong);
-
+  $mainControl.click(togglePlayFromPlayerBar);
   });
+
+var toggleFromPlayerBar = function() {
+}
